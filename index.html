@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <header>
+        <img src="solomon.jpeg" alt="">
+        <h1>Job Solomon</h1>
+        <p>UI/UX Designer, Web Developer, and a Graphic Designer</p>
+    </header>
+    <nav>
+        <button class="burger-menu" id="burgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul id="navMenu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    </section>
+    <section id="about" class="scroll-animate">
+        <h2>About Me</h2>
+        <p>UI/UX designer Crafting intuitive user-centred experiences. Turning ideas into seamless interfaces. Open to learning and still learning, a team player and dedicated to achieving goals. Hello! I'm a passionate web developer with a love for Python programming. I enjoy creating efficient and user-friendly applications.</p>
+    </section>
+    <section id="skills" class="scroll-animate">
+        <h2>Skills</h2>
+        <ul>
+            <li>UI/UX Design</li>
+            <li>HTML & CSS</li>
+            <li>Graphic Design</li>
+        </ul>
+    </section>
+    <section id="projects" class="scroll-animate">
+        <h2>Projects</h2>
+        <div class="project">
+            <img src="iPhone 17 Pro orange right.png" alt="Lovebox Mobile App Screenshot">
+            <h3>Lovebox Mobile App</h3>
+            <p>UI design of restaurant mobile app.</p>
+        </div>
+        <div class="project">
+            <img src="mockup.png" alt="Solopay Mobile App Screenshot">
+            <h3>Solopay</h3>
+            <p>Design of a fintech mobile app.</p>
+        </div>
+        <div class="project">
+            <img src="https://picsum.photos/300/200?random=3" alt="Web Portfolio Screenshot">
+            <h3>Web Portfolio</h3>
+            <p>A web portfolio showcasing my work.</p>
+        </div>
+    </section>
+    <section id="contact" class="scroll-animate">
+        <h2>Contact</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <p><strong>Email:</strong> solomononuh22@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/bhig_s.o?igsh=MXhncnhvN2Y1NnNtZA%3D%3D&utm_source=qr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100045619382171" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/9ja_lastborn001?s=21" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/+2349155051352" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <form id="contactForm" class="contact-form">
+                <input type="text" placeholder="Enter your Name" required>
+                <input type="email" placeholder="Enter your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="submit-btn">SEND</button>
+            </form>
+        </div>
+    </section>
+    <button id="backToTopBtn" class="back-to-top" title="Back to top">⬆️</button>
+    <footer>
+        <p>&copy; 2026 Job Solomon. All rights reserved.</p>
+    </footer>
+    <script>
+        // Burger Menu Toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navMenu = document.getElementById('navMenu');
+        
+        burgerMenu.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        
+        // Close menu when a link is clicked
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                burgerMenu.classList.remove('active');
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+
+        darkModeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInUp 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = this.querySelector('input[placeholder="Your Name"]').value;
+            const email = this.querySelector('input[placeholder="Your Email"]').value;
+            const message = this.querySelector('textarea').value;
+
+            // Simple validation and feedback
+            if (name && email && message) {
+                alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon at ${email}.`);
+                this.reset();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        });
+    </script>
+</body>
+</html>
